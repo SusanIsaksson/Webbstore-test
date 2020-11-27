@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webbshop by Mitchell Hudson</title>
+    <script src="./JQuery/jquery-3.5.1.js"></script>
+</head>
+<body>
+    <h1>Shopping cart</h1>
+
+    <div>
+        <ul>
+            <li><a class="add-to-cart" href="#" data-name="Apple" data-price="1.50">Apple $1.50</a></li>
+            <li><a class="add-to-cart" href="#" data-name="Banana" data-price="2.00">Banana $2.00</a></li>
+            <li><a class="add-to-cart" href="#" data-name="Shoe" data-price="10.50">Shoe $10.50</a></li>
+            <li><a class="add-to-cart" href="#" data-name="Frisbee" data-price="5.00">Frisbee $5.00</a></li>
+        </ul>
+        <button id="clear-cart">Clear cart</button?>
+    </div>
+
+    <div>
+        <ul id="show-cart">
+            <li>??????</li>
+        </ul>
+        <div>Total Cart:$<span id="total-cart"></span></div>
+    </div>
+
+    <script>
+        //JQuery function
+
+        // $("#total-cart").html("100.00");
+
+        $(".add-to-cart").click(function(event) {
+            event.preventDefault();
+            var name = $(this).attr("data-name");
+            var price = Number ($(this).attr("data-price"));
+
+            addItemToCart(name, price, 1);
+            displayCart();
+        });
+
+        $("#clear-cart").click(function(event){
+            clearCart();
+            displayCart();
+        });
+
+       
+        function displayCart() {
+            // console.log("*** Display Cart ***") visar valda item köp
+            var cartArray = listCart();
+            // console.log("**** Count Cart : ****")
+            var output = "";
+
+            for (var i in cartArray) {
+                output += "<li>"
+                    +cartArray[i].name
+                    +" "+cartArray[i].count
+                    +" x "+cartArray[i].price
+                    +" = "+cartArray[i].total
+                    +" <button class='delete-item' data-name='"
+                    +cartArray[i].name+"'>X</button>"
+                    +"</li>";
+            }
+            $("#show-cart").html(output);
+            $("#total-cart").html( totalCart() );
+        }
+
+        $("#show-cart").on("click", ".delete-item", function(event){  //.on istf click för delete-item
+            var name = $(this).attr("data-name");
+            removeItemFromCart(name);
+            displayCart();
+        } )
+
+        var message = "Hello World";
+        var someText = "<h1>"+message+"</h1>";
+        // someText += message;
+       
+        console.log(someText)
+
+        // displayCart();
+
+//**************************************************************************
+//Shopping cart function
+        var cart = [];
+
+        var Item = function(name, price, count) {
+            this.name = name
+            this.price = price
+            this.count = count 
+        };
+
+        //function to sum the same item with addItemToCart
+        function addItemToCart(name, price, count) {
+            for (var i in cart) {
+                if (cart[i].name === name) {
+                    cart[i].count += count;
+                    saveCart();
+                    return                  //break stoppar loopen - return låter funktionen gå vidare till nästa rad
+                    
+                }
+            }
+            var item = new Item(name, price, count);
+            cart.push(item);
+            saveCart();
+        }
+
+        addItemToCart("Apple", 1.50, 1);
+        addItemToCart("Pear", 8.50, 2);
+        addItemToCart("Apple", 1.00, 3);
+        addItemToCart("Pear", 8.50, 2);
+        addItemToCart("Apple", 1.00, 3);
+
+        function removeItemFromCart(name) {
+            for (var i in cart) {
+                if (cart[i].name === name) {
+                    // cart[i].count --;
+                    // if (cart[i].count === 0) {
+                    cart.splice(i, 1);
+                    break;
+                    
+                }
+            }
+                saveCart();
+        }
+
+        function clearCart () {
+            cart = [];
+            saveCart();
+        }
+
+        
+
+        // console.log(cart[0].count);
+        // removeItemFromCart("Apple");
+        // saveCart();
+    
+        
+        // console.log(cart);
+
+        // function clearCart() {
+        //     cart = [];
+        // }
+        // console.log(cart);
+
+        function countCart()  {
+            var totalCount = 0;
+            for (var i in cart) {
+                totalCount += cart[i].count;
+            }
+            return totalCount;
+        }
+        // console.log( countCart() );
+
+        function totalCart() {
+            var totalCost = 0;
+            for (var i in cart) {
+                totalCost += cart[i].price * cart [i].count;
+            }
+            return totalCost.toFixed(2);             //(2)anger antal decimaler
+        }
+
+        // console.log( totalCart() );
+
+        function listCart() {
+            return cart;
+        }
+        
+        // var a = ["A", "B", "C"];
+        // var b = a.slice();          //slice = lägger till b.push och (a) lika och (b) innehåller även "D" 
+        // b.push("D");
+        // console.log(a); 
+        // console.log(b);     //(a) och (b) får samma innehåll beroende på return cart;
+        
+
+        // var a = {age:22, name: "joe"};
+        // var b = a;
+        // b.name = "cindy";
+        // console.log(a);
+        // console.log(b);
+
+        function listCart() {
+            var cartCopy = [];
+            for (var i in cart) {
+                var item = cart[i];
+                var itemCopy = {};
+                for (var p in item) {      //p = property
+                    itemCopy[p] = item [p];
+                }
+                itemCopy.total = (item.price * item.count).toFixed(2);
+                cartCopy.push(itemCopy);
+            }
+            return cartCopy;
+        }
+        var array = listCart();
+        // array[0].name = "Mistake";
+        // console.log ( array );
+
+        function saveCart() {
+            localStorage.setItem("shoppingCart", JSON.stringify(cart));          //("name", value) för string och numbers
+        }
+        // localStorage.setItem("username", "joe") 
+
+        function loadCart () {
+            cart = JSON.parse(localStorage.getItem("shoppingCart"));  //JSON konverterar tillbaka till "Value"
+        }
+
+        loadCart();
+        displayCart();      //ska ligga efter loadCart för att få rätt ordning
+
+        var array = listCart();
+        // console.log(array);
+
+        /* Shoppingcart - function*/ 
+        //addItemToCart(name, price, count) //Add item
+
+        //removeItemFromCart(name ) //Removes one item
+        //removeItemFromCartAll(name) //Removes all item name
+        //clearCart()
+        //countCart()   -> return total count
+        //totalCart()   -> return total cost
+        //listCart()    -> array of Items
+        //saveCart()        //save in localstorage
+        //loadCart()        //get the cart from localstorage
+
+
+    </script>
+
+
+    <script>
+        // var cart = [];
+        // //[{name price count}]
+        // var Item = function(name, price, count) {  
+        // //=function Item() {}
+        //     this.name = name
+        //     this.price = price
+        //     this.count = count 
+        // }; 
+
+        // var brush = new Item("Brush", 1.99, 1);     //{name:"", price:0.00, count:0}
+
+        // cart.push( new Item("Apple", 2.13, 1));
+        // cart.push( brush);
+
+        // console.log(cart);
+        
+
+    </script>
+
+
+
+
+    <script>
+        // scope = visuable value
+
+        // var global = "Hello";
+
+        // function myfunction() {}
+    </script>
+
+
+
+    <script>
+
+        // function myfunction(message, count) {
+        //     for (var i = 0; i < count; i++) {
+        //         console.log(message);
+        //     }
+        //     console.log(message);
+        // }
+        // myfunction("Hello World", 2);   //"kallar" på funktionen ovan
+        // myfunction("Hej igen", 5);
+
+        // function square(num) {
+        //     return num * num;
+        // }
+
+        // console.log( square(3) );
+
+    </script>
+
+
+    <script>
+        // var cart = [];
+
+        // var item = {name:"IPhoneX", price: 9999, count:3};
+
+        // cart.push(item);
+
+        // console.log(cart);
+        // console.log(cart[0]);
+        // console.log(cart[0].name);
+        // console.log(cart[0].price);
+
+    </script>
+
+
+
+    <script>
+        // var obj ) {key:10/"namn", a:20, b:"Name"};
+        // var obj = {name:"iPhoneX", price:9999, count:2};
+        // console.log(obj.name);
+        // console.log(obj.price);
+
+        // for (var key in obj) {
+        //     console.log(key+" "+obj[key]);
+        // }
+
+        
+        // var array = ["iPhoneX", "LGV30", "OnePlus5"];
+        // array.push("SamsungS8") 
+        // for (var i = 0; i < array.length; i++) {
+        //     console.log(array[i]);
+        // }
+
+
+        // console.log(array.length);
+        // array.push("SamsungS8");
+        // console.log(array.length);
+        // console.log(array);
+        // console.log( array[2] );
+    </script>
+    <script src="/webbShop.js"></script>
+    <script src="./JQuery/jquery-3.5.1.js"></script>
+</body>
+</html>

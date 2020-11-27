@@ -1,0 +1,262 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a:link {
+    text-decoration: none;
+    color: white;
+}
+
+a:visited {
+    text-decoration: none;
+    color: white;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+#main {
+    padding-top: 4vw;
+}
+
+.header {
+    position: fixed;
+    display: flex;
+    height: 6vh;
+    width: 100vw;
+    padding-left: 20px;
+    padding-right: 40px;
+    background-color: black;
+    color: white;
+    font-family: Trebuchet MS;
+    font-size: 24px;
+}
+
+.divLogo {
+    display: flex;
+    justify-content: left;
+    text-align: center;
+    align-items: center;
+    width: 25%;
+}
+
+.divVarukorg {
+    display: flex;
+    align-items: center;
+
+    width: 25%;
+    justify-content: flex-end;
+    font-size: 70%;
+}
+
+.divVarukorg #counter {
+    margin-right: 10px;
+}
+
+.divMitten {
+    display: flex;
+    width: 50%;
+}
+
+.productContainer {
+    width: 100vw;
+    height: 90vh;
+
+    display: flex;
+    justify-content: center;
+}
+
+.productContainer:nthChild(2n+1) {
+    background-color: #f5f5f5;
+}
+
+.productCard {
+    width: 34vw;
+    height: 100%;
+
+    padding: 5% 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    font-family: Arial;
+    font-size: 30px;
+}
+
+.productTitle {
+    font-size: 95%;
+}
+
+.productDescription {
+    font-size: 40%;
+}
+
+.productImage {
+    height: 60%;
+    max-height: 320px;
+}
+
+.productPrice {
+    font-size: 50%;
+}
+
+.btn-Add-To-Cart {
+    height: 32px;
+    width: auto;
+    background-color: #5596F5;
+    color: #ffffff;
+    padding: 10px;
+    border: 1px;
+    border-radius: 15px;
+}
+
+#varukorgTotal {
+    font-family: arial;
+    font-size: 20px;
+    height: 4vh;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#buttonKop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 4vh;
+    width: 20%;
+    background-color: #5596F5;
+    color: #ffffff;
+    font-size: 18px;
+    border-color: #5596F5;
+    border-radius: 8px;
+}
+
+#productsToBuyContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 60px;
+    font-size: 30px;
+}
+
+#mainVarukorg {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 10vm
+}
+
+.produktVal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 50%;
+}
+
+.kundvagnH4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: arial;
+    font-size: 28px;
+    padding-top: 6vw;
+    padding-bottom: 20px;
+}
+
+.flexItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    background-color: #f5f5f5;
+    margin: 1%;
+    padding: 8px;
+    border-color: #5596F5;
+    border-style: solid;
+    border-width: 2px 2px 2px 2px;
+    border-radius: 4%;
+}
+
+.divSpace {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-around;
+    width: 45%;
+}
+
+.productImage {
+    height: 20vh;
+    width: auto;
+}
+
+.productTitle {
+    font-family: arial;
+    font-size: 22px;
+}
+
+.productPrice {
+    font-family: arial;
+    font-size: 10px;
+    background-color: #e64e4e;
+    border-color: #e64e4e;
+    color: #ffffff;
+    border-radius: 10%;
+    font-size: 60%;
+    padding: 1px;
+    margin-top: 14px;
+}
+
+.checkout {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: #212121;
+}
+
+.checkoutContent {
+    background-color: #ffffff;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #f5f5f5;
+    width: 80%;
+    height: 30%;
+}
+
+.checkoutClose {
+    color: #f5f5f5;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.checkoutClose:hover, .checkoutClose:focus {
+    color: #212121;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn {
+    background-color: blue;
+    border: none;
+    color: white;
+    padding: 12px 16px;
+    font-size: 16px;
+    cursor: pointer;
+}

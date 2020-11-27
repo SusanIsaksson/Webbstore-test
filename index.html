@@ -5,12 +5,72 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Webbstore-test</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="card-style.css">
+    <link rel="stylesheet" href="header-style.css">
+
+    <script src="main.js" defer></script>
+    <script src="store.js" defer></script>
 </head>
 <body>
+    <header class="header">
+        <div class="divLogo">
+          <a href="index.html">
+            <p>TechStore</p>
+          </a>
+        </div>
+        <div class="divMitten">
+          <div><a href="#">Hem</a></div>
+          <div><a href="#">Min lista</a></div>
+          <div><a href="#">Om oss</a></div>
+         
+
+        <button onclick="document.getElementById('id01').style.display='block'" style="height: 50px; width:60px; background-color: black; color: white">Login</button>
+
+      <div id="id01" class="modal">
+  
+        <form class="modal-content animate" action="/action_page.php" method="post">
+          <div class="imgcontainer">
+            <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+            <p class="divLogo" style="align-items: center;">TechStore</p>
+          </div>
+
+          <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+        
+            <button type="submit">Login</button>
+            <label>
+              <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+          </div>
+
+          <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+          </div>
+        </form>
+      </div>
+
+      <div class="divVarukorg">
+        <span class="antalProdukter">0</span>
+        <a href="/cart.html"><img src="/imgs/varuvagn4.jpg" alt="Cart" style="height: 40px;"></a>
+      </div>  
+
+    </header>
+
+    <div id="main">
+
+    </div>
+
+   
+</body>
+</html>
     
 
 
 
-    <script src="main.js"></script>
-</body>
-</html>
+
+    
